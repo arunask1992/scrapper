@@ -24,7 +24,7 @@ final1 = []
 def crimes():
     with open("text", "w") as outfile:
         pruneDataSet()
-        for i in range(0,99):
+        for i in range(0,10):
             scrap(i)
         print("=================================================")
         groupByArea([x for x in final1 if x is not None])
@@ -40,7 +40,6 @@ def constructJson(crime_map):
 		temp = {}
 		temp["name"] = map
 		print(map)
-		print(getLatLong(map))
 		latLong = getLatLong(map).split(',')
 		if len(latLong) > 0:
 			temp["lattitude"] = latLong[0]
@@ -111,10 +110,5 @@ def writeLatLong():
         for area in areas_list:
             latlong = getLatLong(area[0]).split(',')
             writer.writerow({'area_name': area[0], 'latitude': latlong[0], 'longitude': latlong[1]})
-
-
-def exportData():
-	con = pycps.Connection('tcp://cloud-eu-0.clusterpoint.com:9007', 'Vibathu', 'deepasaj@thoughtworks.com', 'admin123', '100643')
-	con.insert(crime_map)
 
 run(host='localhost', port= 8080, debug=True)
